@@ -1,0 +1,230 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+/*===== VARIABLES CSS =====*/
+:root {
+    --header-height: 3rem;
+    --font-semi: 600;
+    /*===== Colors =====*/
+    /*Purple 260 - Red 355 - Blue 224 - Pink 340*/
+    /* HSL color mode */
+    --hue-color: 224;
+    --first-color: hsl(var(--hue-color), 89%, 60%);
+    --second-color: hsl(var(--hue-color), 56%, 12%);
+    /*===== Font typography =====*/
+    --body-font: 'Poppins', sans-serif;
+    --big-font-size: 2rem;
+    --h2-font-size: 1.25rem;
+    --normal-font-size: .938rem;
+    --smaller-font-size: .75rem;
+    /*===== Margins =====*/
+    --mb-2: 1rem;
+    --mb-4: 2rem;
+    --mb-5: 2.5rem;
+    --mb-6: 3rem;
+    --z-back: -10;
+    --z-fixed: 100;
+}
+.test {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    align-items: center;
+    justify-content: center;
+}
+
+.ticket {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 24px;
+    box-shadow:-12px -5px 20px 11px rgb(0 0 0 / 10%);
+    text-align: start;
+}
+
+.ticket-header {
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.passenger-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-top: 20px;
+    gap: 178px;
+    text-align: left;
+
+}
+
+.info-label {
+    color: #7f8c8d;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.barcode {
+    margin-top: 20px;
+}
+
+button {
+    position: relative;
+    top: 18px;
+    width: 106px;
+    height: 50px;
+    border-radius: 20px;
+    left: 46px;
+    cursor: pointer;
+
+}
+
+.khaltilogo {
+    margin-top: 20px !important; /* Adjust the margin-top value as needed */
+}
+
+.khalti {
+    margin-top: -36px !important; /* Adjust the margin-top value as needed */
+}
+
+
+
+
+
+.zoom-in-hover img{
+    position: relative;
+    height:35px;
+    top: 9px;
+    margin-left:0px;
+    border-radius:6px !important;
+
+
+
+
+}
+
+.note {
+    background-color: #ffffff;
+    color:black;
+    padding: 15px;
+    border-radius: 24px;
+    margin: 20px 0;
+    font-weight: var(--font-semi);
+    
+}
+
+.note p {
+    margin: 0 0 10px;
+}
+
+/* ===== FOOTER =====*/
+
+footer .container{
+    background-color: var(--second-color);
+}
+
+.col2 p{
+    color: white;
+    font-size: 35px;
+    margin-top: 14px;
+    margin-right: 92px;
+}
+
+.row{
+    display: flex;
+    justify-content:space-evenly;
+    padding: 4px 50px;
+}
+.footer-col ul{
+    list-style: none;  
+}
+
+.footer-col h4{
+    color: white;
+    margin-bottom: 25px;
+    font-size: 22px;
+    position: relative;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.footer-col h4::before{
+    content:'';
+    width: 75px;
+    height: 2px;
+    position: absolute;
+    background-color: #e91e64;
+    bottom: -10px;
+}
+
+.footer-col ul li{
+    padding: 10px 0;
+}
+
+.footer-col ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.footer-col ul li a:hover{
+    opacity: 1;
+}
+
+.footer-col .social-icons i{
+    display: inline;
+    color: white;
+    font-size: 20px;
+    margin: 0 15px;
+    transition: 0.5s;
+}
+
+.footer-col .social-icons i :hover{
+    color: #e91e64;
+}
+
+.col1 p{
+    color:white;
+    /* margin-left: 502px; */
+    margin-bottom: 7px;
+    
+}
+
+.footer-col{
+    justify-content: space-between;
+}
+
+@media (max-width: 600px){
+    footer .footer-col ul{
+        margin-left: 20px;
+        margin-bottom: 20px; 
+    }
+
+    footer .col1 p{
+        margin: 0px;
+        margin-left: -44px;
+        margin-bottom: 7px;  
+    }
+
+    footer .col2 p{
+        margin-left: -158px;
+        margin-bottom: 20px;
+        
+    }
+
+    .footer-col {
+        margin-left: -96px;
+        margin-bottom: -25px;
+
+    }
+}
+
+
+
+

@@ -1,0 +1,383 @@
+/* Body styles */
+body {
+    overflow: hidden;
+    height: 100%;
+    margin: 0;
+    overflow-y: auto; /* Set overflow-y to auto for vertical scrollbar */
+    overflow-x: hidden; /* Set overflow-x to hidden to hide horizontal scrollbar */
+}
+
+/* Main container styles */
+.main {
+    /* background-image: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url('/static/images/bgs.jpg'); */
+    height: 200vh;
+    width: 110%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    background-color:#ffffff;
+    min-height: 100vh;
+}
+
+/* Logo container styles */
+.logo-container {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    z-index: 1000;
+}
+
+/* Logo styles */
+.logo {
+    max-width: 225px;
+    height: auto;
+}
+
+/* Navigation bar styles */
+.navbar {
+    width: 85%;
+    margin: auto;
+    padding: 38px 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding-left: 140px;
+}
+
+/* Navigation link styles */
+.navbar ul li {
+    list-style: none;
+    display: inline-block;
+    margin: 10px 20px;
+    position: relative;
+    font-size: 20.3px;
+    text-shadow: 0 4px 8px rgb(29, 29, 29);
+}
+
+/* Navigation link hover styles */
+.navbar ul li a:hover {
+    color: #04AA6D;
+}
+/* Styling for navigation links */
+.navbar ul li a {
+    text-decoration: none;
+    color: #0e0e0e;
+    transition: color 0.5s;
+}
+/* Button container styles */
+.button-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 670px;
+    margin-left: 340px;
+    position: absolute;
+}
+
+/* Button styles */
+.button-container button {
+    width: 170px;
+    height: 40px;
+    font-size: 16px;
+    margin: 0 90px;
+    cursor: pointer;
+    background-color: #14b97c;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+/* Button hover styles */
+.button-container button:hover {
+    background-color: #0d8a5e;
+}
+
+
+/* Navigation link underline styles */
+.navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0;
+    background: #14b97c;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+/* Navigation link underline on hover styles */
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+
+/* details panel */
+.details-panel {
+    width: 50%;
+    height: 400px; /* Adjust the height as needed */
+    margin: 0 auto;
+    padding: 15px;
+    background-color: #f8f8f8;
+    box-shadow: -9px -3px 18px 16px rgb(123 43 43 / 10%);
+    margin-top: 50px;
+    position: absolute;
+    top: 25%;
+    left: 48%;
+    transform: translate(-50%, -50%);
+    border-radius: 16px;
+    background: none;
+    font-family: 'memphis';
+    margin-bottom: 20px;
+
+    overflow: hidden;
+}
+
+
+/* Colored corner styles using ::before pseudo-element */
+.details-panel::before {
+    content: "";
+    position: absolute;
+    bottom: 0; /* Place the corner at the bottom */
+    left: 0;   /* Place the corner at the left */
+    width: 249px; /* Adjust width and height as needed */
+    height: 98px;
+    background-color: rgb(38, 96, 232); /* Your desired color */
+    clip-path: polygon(0 100%, 0 0, 100% 100%); /* Triangle shape for the bottom-left corner */
+}
+
+
+/* Additional styles for ticket-details and payment-details if needed */
+.ticket-details, .payment-details {
+    margin-bottom: 23px;
+    left: 0px;}  
+
+    .ticket-details{
+        display: flex;
+        flex-direction: column;
+    }
+
+.ticket-details p {
+        display: inline-block;
+        width: 45%; 
+        margin: 0;
+        padding: 100px;
+    }
+.busnumber{
+    display: flex;
+       
+        margin-top: 9px;
+        margin-left: 0px; 
+        font-weight: bold;
+}
+
+.busnumber p01 {
+    top: 29px; /* Adjust the value to move the bus number downward */
+    color: red;
+    font-size: 18px;
+
+
+}
+
+.busnumber p0 {
+    top: 20px; /* Adjust the value to move the bus number downward */
+    font-size: 18px;
+}
+
+   
+.passenger{
+        display: flex;
+        flex-direction: column;
+        margin-top: 55px;
+       
+    }    
+
+    .passenger p1 {
+        margin: 0;
+    }
+
+    .type{
+        display: flex;
+        flex-direction: column;
+        margin-top: -43px;
+        margin-left: 285px; 
+       
+    }
+
+    .type p2 {
+        margin: 0;
+        margin-top: 0px;
+
+    }
+
+    .inline-info {
+        display: flex;
+       
+        margin-bottom: 10px;
+        
+    }
+    
+    .from,
+    .to,
+    .date,
+    .time,
+    .seat {
+        margin-right: 40px;
+        margin-bottom: -24px; /* Adjust the value as needed */
+    }
+    
+    .from p3,
+    .to p4,
+    .date p5,
+    .time p6,
+    .seat p7 {
+        margin: 0;
+    }
+.payment-row{
+    display: inline-block;
+    width: 45%; 
+    margin: 0;
+    padding: 30px; 
+    margin-left: 70px;
+
+}
+
+
+.footer-panel2 p {
+    color: black;
+    margin: 5px 0;
+    font-family: memphis;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 400px;
+    
+}
+
+/* Busimg panel */
+.panel {
+    padding: 20px;
+    text-align: center;
+    max-width: 78%;
+    height: 127px;
+    position: fixed; /* Position relative to the viewport */
+    right: 58px; /* Distance from the right side */
+    top: 30px; /* Distance from the top */
+    width: 250px;
+}
+
+/* Style the image */
+.panel img {
+    max-width: 100%; /* Use 100% to fill the container */
+    height: 110%;
+    left: 20;
+    
+}
+
+/* ===== FOOTER =====*/
+
+footer .container{
+    background-color: var(--second-color);
+}
+
+.col2 p{
+    color: white;
+    font-size: 35px;
+    margin-top: 14px;
+    margin-right: 92px;
+}
+
+.row{
+    display: flex;
+    justify-content:space-evenly;
+    padding: 4px 50px;
+}
+.footer-col ul{
+    list-style: none;  
+}
+
+.footer-col h4{
+    color: white;
+    margin-bottom: 25px;
+    font-size: 22px;
+    position: relative;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.footer-col h4::before{
+    content:'';
+    width: 75px;
+    height: 2px;
+    position: absolute;
+    background-color: #e91e64;
+    bottom: -10px;
+}
+
+.footer-col ul li{
+    padding: 10px 0;
+}
+
+.footer-col ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.footer-col ul li a:hover{
+    opacity: 1;
+}
+
+.footer-col .social-icons i{
+    display: inline;
+    color: white;
+    font-size: 20px;
+    margin: 0 15px;
+    transition: 0.5s;
+}
+
+.footer-col .social-icons i :hover{
+    color: #e91e64;
+}
+
+.col1 p{
+    color:white;
+    /* margin-left: 502px; */
+    margin-bottom: 7px;
+    
+}
+
+.footer-col{
+    justify-content: space-between;
+}
+
+@media (max-width: 600px){
+    footer .footer-col ul{
+        margin-left: 20px;
+        margin-bottom: 20px; 
+    }
+
+    footer .col1 p{
+        margin: 0px;
+        margin-left: -44px;
+        margin-bottom: 7px;  
+    }
+
+    footer .col2 p{
+        margin-left: -158px;
+        margin-bottom: 20px;
+        
+    }
+
+    .footer-col {
+        margin-left: -96px;
+        margin-bottom: -25px;
+
+    }
+}
+
+

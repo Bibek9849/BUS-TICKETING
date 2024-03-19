@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket Booking</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/ticket.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">  
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <header class="l-header">
+        <nav class="nav bd-grid">
+            <div>
+                <a class="nav_logo" href="{% url 'home' %}">SuvaYatra</a>
+            </div>
+
+            <div class="nav__menu" id="nav-menu">
+                <ul class="nav__list">
+                    <li class="nav__item"><a href="{% url 'home' %}" class="nav__link active">Home</a></li>
+                    <li class="nav__item"><a href="{% url 'home' %}#about" class="nav__link">About</a></li>
+                    <li class="nav__item"><a href="{% url 'home' %}#skills" class="nav__link">Help</a></li>
+                    <li class="nav__item"><a href="{% url 'home' %}#work" class="nav__link">Interior</a></li>
+                    <li class="nav__item"><a href="{% url 'home' %}#contact" class="nav__link">Feedback</a></li>                    
+                </ul>
+            </div>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+            
+        </nav>
+    </header>
+    <!-- Main container -->
+    <div class="main">
+        
+        <!-- Ticket and Payment Details Panel -->
+        <div class="details-panel">
+            <div class="panel">
+                <!-- Add the image with the correct path 'static/media/bus.png' -->
+                <img src="{{schedule.bus.bus_picture.url}}" alt="Bus Image">
+            </div>
+            <!-- Ticket Details -->
+            <section class="ticket-details">
+                <h2 style="text-align: center;margin-bottom: 20px;">SuvaYatra Travels</h2>
+                <div class="busnumber">
+                    <p0><strong>Bus No.</strong></p0>
+                    <p01>{{schedule.bus.bus_number }}</p01>
+                </div>
+                <div class="passenger">
+                    <p1><strong>Passenger Name:</strong></p1>
+                    <p1>{{passenger_details.name}}</p1>
+                </div>
+                <div class="type">
+                    <p2><strong>Ticket type:</strong></p2>
+                    <p2>One Way</p2>
+                </div>
+                
+                
+            </section>
+            <div class="inline-info">
+                <div class="from">
+                    <p3><strong>From:</strong></p3>
+                    <p3>{{schedule.route.from_location }}</p3>
+                </div>
+                
+                <div class="to">
+                    <p4><strong>To:</strong></p4>
+                    <p4>{{schedule.route.to_location }}</p4>
+                </div>
+                <div class="date">
+                    <p5><strong>Date of Booking:</strong></p5>
+                    <p5>{{payment_detail.created_at.date  }}</p5>
+                </div>
+                <div class="time">
+                    <p6><strong>Time:</strong></p6>
+                    <p6>{{payment_detail.created_at.time  }}</p6>
+                </div>
+
+                <div class="seat">
+                    <p7><strong>Seat No.:</strong></p7>
+                    {% for seat in passenger_seat %}
+                    {{ seat.seat_number.seat_side }}{{ seat.seat_number.seat_number }}{% if not forloop.last %}, {% endif %}
+                        {% endfor %}
+                    
+                </div>
+                
+            </div>
+
+            <!-- Payment Details -->
+            <section class="payment-details">
+                <!-- <h2>Payment Details</h2> -->
+                <div class="payment-row">
+                    <p><strong>Total Amount:</strong> <span style="color: green;">Rs {{payment_detail.paid_amount }}</span></p>
+                    <p><strong>Payment Method:</strong> {{payment_detail.payment_method }}</p>
+                </div>
+            </section>
+
+            <div class="footer-panel2">
+                <!-- Footer text -->
+                <p>Thank you for choosing our bus service!</p>
+            </div>
+        </div>
+        <!-- Print button and JavaScript code -->
+
+        
+        <div class="button-container">
+            <button onclick="printTicket()">Print</button>
+        </div>
+    </div>
+<!-- Add this script inside the <head> or at the end of the <body> -->
+    <script>
+        function printTicket() {
+            // Set the desired width and height for the details panel
+            var printWidth = 800; // Set your desired width in pixels
+            var printHeight = 400; // Set your desired height in pixels
+    
+            // Create a new window for printing
+            var printWindow = window.open('', '_blank');
+    
+            // Clone the details panel
+            var detailsPanel = document.querySelector('.details-panel').cloneNode(true);
+    
+            // Set the width and height of the cloned details panel
+            detailsPanel.style.width = printWidth + 'px';
+            detailsPanel.style.height = printHeight + 'px';
+    
+            // Append the cloned details panel to the new window
+            printWindow.document.body.appendChild(detailsPanel);
+    
+            // Apply the styles from the main stylesheet
+            var stylesheets = document.styleSheets;
+            for (var i = 0; i < stylesheets.length; i++) {
+                var stylesheet = stylesheets[i];
+                if (stylesheet.href && stylesheet.href.endsWith('ticket.css')) { // Adjust the stylesheet name
+                    var printStylesheet = printWindow.document.createElement('link');
+                    printStylesheet.rel = 'stylesheet';
+                    printStylesheet.type = 'text/css';
+                    printStylesheet.href = stylesheet.href;
+                    printWindow.document.head.appendChild(printStylesheet);
+                }
+            }
+    
+            // Apply print-specific styles for landscape mode
+            var customStyle = printWindow.document.createElement('style');
+            customStyle.innerHTML = '@page { size: landscape; }';
+            printWindow.document.head.appendChild(customStyle);
+    
+            // Print the new window
+            printWindow.print();
+    
+            // Close the new window after printing
+            printWindow.close();
+        }
+    </script>
+    
+    
+
+</body>
+
+ <!--===== FOOTER =====-->
+ <footer>
+    <div class="container">
+        <div class="row">
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="">Email:suvayatra@gmail.com</a></li>
+                    <li><a href="">Phone: 9829179443/9702285911</a></li>
+                    <li><a href="">Address: Dillibazar,Kathmandu</a></li>
+                </ul>
+            </div>
+            
+            <!-- 1st Column -->
+            <div class="col2">
+                <p>SuvaYatra</p>
+            </div>
+
+            <!-- 2nd Column -->
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <ul class="social-icons">
+                 <li><a href="https://www.facebook.com/profile.php?id=61555407062591"><i class="fab fa-facebook"></i></a></li>
+                
+                 <li><a href="https://www.instagram.com/suva.yatra/"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col1">
+                <p>&#169; SuvaYatra Travels. All rights reserved</p>
+            </div>
+        </div>
+        </div>
+    </div>
+        </footer>
+				
+
+<script>
+    const showMenu = (toggleId, navId) =>{
+        const toggle = document.getElementById(toggleId),
+        nav = document.getElementById(navId)
+    
+        if(toggle && nav){
+            toggle.addEventListener('click', ()=>{
+                nav.classList.toggle('show')
+            })
+        }
+    }
+    showMenu('nav-toggle','nav-menu')
+    
+    /*==================== REMOVE MENU MOBILE ====================*/
+    const navLink = document.querySelectorAll('.nav__link')
+    
+    function linkAction(){
+        const navMenu = document.getElementById('nav-menu')
+        // When we click on each nav__link, we remove the show-menu class
+        navMenu.classList.remove('show')
+    }
+    navLink.forEach(n => n.addEventListener('click', linkAction))
+    
+    /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+    const sections = document.querySelectorAll('section[id]')
+    
+    function scrollActive(){
+        const scrollY = window.pageYOffset
+    
+        sections.forEach(current =>{
+            const sectionHeight = current.offsetHeight
+            const sectionTop = current.offsetTop - 50;
+            sectionId = current.getAttribute('id')
+    
+            if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
+            }else{
+                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
+            }
+        })
+    }
+    window.addEventListener('scroll', scrollActive)
+    
+    /*===== SCROLL REVEAL ANIMATION =====*/
+    const sr = ScrollReveal({
+        origin: 'top',
+        distance: '60px',
+        duration: 2000,
+        delay: 200,
+    //     reset: true
+    });
+    
+    sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
+    sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
+    sr.reveal('.home__social-icon',{ interval: 200}); 
+    sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+    </script>
+    <script>
+       function sendMail() {
+        // Get form values
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let message = document.getElementById("message").value;
+    
+        // Validate form fields
+        if (!name || !email || !message) {
+            createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'All fields are required.');
+                return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                // Display a toast notification for invalid email
+                createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Invalid email address.');
+                return;
+            }
+        let parms = {
+            name: name,
+            email: email,
+            message: message,
+        };
+    
+        // Send email using EmailJS
+        emailjs.send("service_5wr48mf", "template_ghrb405", parms)
+            .then(() => {
+                createToast('success', 'fa-solid fa-circle-check', 'Success', 'Thank you for your feedback!');
+            })
+            .catch((error) => {
+                console.error("Error sending email:", error);
+                createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Error sending email.');
+                });
+            
+    }
+    
+    
+    </script>
+    <script>
+        let notifications = document.querySelector('.notifications');
+        let success = document.getElementById('success');
+        let error = document.getElementById('error');
+        let warning = document.getElementById('warning');
+        let info = document.getElementById('info');
+        
+        function createToast(type, icon, title, text){
+            let newToast = document.createElement('div');
+            newToast.innerHTML = `
+                <div class="toast ${type}">
+                    <i class="${icon}"></i>
+                    <div class="content">
+                        <div class="title">${title}</div>
+                        <span>${text}</span>
+                    </div>
+                    <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+                </div>`;
+            notifications.appendChild(newToast);
+            newToast.timeOut = setTimeout(
+                ()=>newToast.remove(), 5000
+            )
+        }
+        success.onclick = function(){
+            let type = 'success';
+            let icon = 'fa-solid fa-circle-check';
+            let title = 'Success';
+            let text = 'This is a success toast.';
+            createToast(type, icon, title, text);
+        }
+        error.onclick = function(){
+            let type = 'error';
+            let icon = 'fa-solid fa-circle-exclamation';
+            let title = 'Error';
+            let text = 'This is a error toast.';
+            createToast(type, icon, title, text);
+        }
+        warning.onclick = function(){
+            let type = 'warning';
+            let icon = 'fa-solid fa-triangle-exclamation';
+            let title = 'Warning';
+            let text = 'This is a warning toast.';
+            createToast(type, icon, title, text);
+        }
+        info.onclick = function(){
+            let type = 'info';
+            let icon = 'fa-solid fa-circle-info';
+            let title = 'Info';
+            let text = 'This is a info toast.';
+            createToast(type, icon, title, text);
+        }
+    </script>
+
+</html>

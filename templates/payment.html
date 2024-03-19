@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+{% load static %}
+<html> 
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Document title -->
+        <title>Passenger Details</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+        <!-- Link to external stylesheet -->
+        <link rel="stylesheet" href="{% static 'css/home.css' %}">
+        <link rel="stylesheet" href="{% static 'css/payment.css' %}">
+
+        
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    
+        <style>
+          .zoom-in-hover {
+            position: relative;
+
+          }
+          .zoom-in-hover button {
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease;
+          }
+          .zoom-in-hover button:hover {
+            transform: scale(1.1);
+
+          }
+        </style>
+
+
+    </head>
+    <body>
+          <!--===== HEADER =====-->
+          <header class="l-header">
+            <nav class="nav bd-grid">
+                <a href="{% url 'home' %}">
+                    <h1 class="nav_logo">SuvaYatra</h1>
+                </a>
+                
+    
+                <div class="nav__menu" id="nav-menu">
+                    <ul class="nav__list">
+                        <li class="nav__item"><a href="{% url 'home' %}#home" class="nav__link active">Payment</a></li>
+                        <li class="nav__item"><a href="{% url 'home' %}#about" class="nav__link">About</a></li>
+                        <li class="nav__item"><a href="{% url 'home' %}#skills" class="nav__link">Help</a></li>
+                        <li class="nav__item"><a href="{% url 'home' %}#work" class="nav__link">Interior</a></li>
+                        <li class="nav__item"><a href="{% url 'home' %}#contact" class="nav__link">Feedback</a></li>                    
+                    </ul>
+                </div>
+    
+                <div class="nav__toggle" id="nav-toggle">
+                    <i class='bx bx-menu'></i>
+                </div>
+            </nav>
+        </header>
+    <main class="l-main">
+        <section class="payment section " id="payment">
+            <h2 class="section-title">Passenger Details</h2>
+
+            <div class="bd-grid">
+                <div >
+                    <div class="ticket test">
+                        <div class="passenger-info">
+                            <span id="passenger-id" hidden>{{passenger_details.id}} </span>
+
+                            <div>
+                                <div class="info-label">Passenger Name</div>
+                                <div class="info-value"> {{ passenger_details.name }}</div>
+                                <div class="info-label">Contact Number</div>
+                                <div class="info-value">{{ passenger_details.contact }}</div>
+
+                                <div class="info-label">Seat Number</div>
+                                <div class="info-value">
+                                    {% for seat in seat_numbers %}
+                                    {{ seat.seat_side }}{{ seat.seat_number }}{% if not forloop.last %}, {% endif %}
+                                    {% endfor %}
+                                </div>
+
+                                <div class="info-label" style="color: #5E338D;">Total Fare</div>
+                                <div class="info-value"><span id="total_price">{{total_price }}</span>
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="info-label">Departure Date</div>
+                                <div class="info-value"> {{ passenger_details.schedule.departure_time.date }}</div>
+
+                                <div class="info-label">Pickup Point</div>
+                                <div class="info-value"> {{ passenger_details.schedule.route.from_location }}</div>
+
+                                <div class="info-label">Total Price Per Seat</div>
+                                <div class="info-value"> {{passenger_details.schedule.route.price }}</div>
+
+                            </div>
+                            <div>
+                                <div class="info-label">Departure Time</div>
+                                <div class="info-value">{{ passenger_details.schedule.departure_time.time }}</div>
+
+                                <div class="info-label">Dropping Point</div>
+                                <div class="info-value">{{ passenger_details.schedule.route.to_location }} </div>
+                            </div>
+                        </div>
+                        <div class="note barcodes">
+                            <p>**** Note if you get a pending message from Khalti or if your transaction is completed but if you don't get a ticket, then please contact our operator.</p>
+                            <p>**** Please ensure that you will be redirected to our website after the payment is done.</p>
+                            <p>**** Please note your ticket will be confirmed once payment is received at our end. If you are having a problem with payment, please contact our operator.</p>
+                        </div>
+
+                    </div>
+                    {% if not payment%}
+
+                    <div class="zoom-in-hover">
+                        <button style="background-color: #5E338D;" >
+                            <div class="khaltilogo" style="margin-top: 10px"!important></div>
+                            <img class="khalti" id="payment-button" src='/static/images/khalti.jpg' alt="Pay with Khalti" title="Pay with khalti">
+                        </button>
+                        <img src='/static/images/click2.png' alt="Your Image" style="display: block; margin: 0 auto; margin-top: -30px; margin-left: 150px; width: 6%; height: 6%;">
+                        <p style="text-align: center; color: #5E338D; margin-top: -1px; margin-left: -570px; font-weight: bold;">Pay with Khalti</p>
+                    </div>
+
+                    {% else %}
+                        <form action="{% url 'ticket' passenger_details.id %}" method="GET" style="margin-top:10px;">
+                            <button class="button" type="ticket">View Ticket</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+    
+ <!--===== FOOTER =====-->
+ <footer>
+    <div class="container">
+        <div class="row">
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <ul>
+                    <li><a href="">Email:suvayatra@gmail.com</a></li>
+                    <li><a href="">Phone: 9829179443/9702285911</a></li>
+                    <li><a href="">Address: Dillibazar,Kathmandu</a></li>
+                </ul>
+            </div>
+            
+            <!-- 1st Column -->
+            <div class="col2">
+                <p>SuvaYatra</p>
+            </div>
+
+            <!-- 2nd Column -->
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <ul class="social-icons">
+                 <li><a href="https://www.facebook.com/profile.php?id=61555407062591"><i class="fab fa-facebook"></i></a></li>
+                
+                 <li><a href="https://www.instagram.com/suva.yatra/"><i class="fab fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col1">
+                <p>&#169; SuvaYatra Travels. All rights reserved</p>
+            </div>
+        </div>
+        </div>
+    </div>
+        </footer>
+				
+
+<script src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.17.0.0.0/khalti-checkout.iffe.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+const passenger_id= parseInt(document.getElementById("passenger-id").innerText)
+
+    function verifyPayment(payload){
+        $.ajax({
+            url: `/backend/api/verify_payment/${passenger_id}/`,
+            type: "POST",
+            data: payload,
+            dataType: 'json',
+            sucess: function (response) {
+                {% comment %} alert('Payment successful! Thank you for booking. Please print your Tickets.'); {% endcomment %}
+                {% comment %} locations.href=`/backend/passenger_details/${passenger_id}/` {% endcomment %}
+            },
+            error: function (error) {alert(error.responseJSON['message'])}
+        });
+    }
+
+
+    var config = {
+        // replace the publicKey with yours
+        "publicKey": "test_public_key_11bc2e57406d437ca08a84a1bc30ddd2",
+        "productIdentity": "1234567890",
+        "productName": "Dragon",
+        "productUrl": "http://gameofthrones.wikia.com/wiki/Dragons",
+        "paymentPreference": [
+            "KHALTI",
+            "EBANKING",
+            "MOBILE_BANKING",
+            "CONNECT_IPS",
+            "SCT",
+            ],
+        "eventHandler": {
+            onSuccess (payload) {
+                // hit merchant api for initiating verfication
+                {% comment %} alert('Payment successful! Thank you for your purchase.'); {% endcomment %}
+
+                console.log(payload);
+                verifyPayment(payload)
+                location.href=`/backend/ticket/${passenger_id}/`
+            },
+            onError (error) {
+                console.log(error);
+            },
+            onClose () {
+                console.log('widget is closing');
+            }
+        }
+    };
+
+    var checkout = new KhaltiCheckout(config);
+    var btn = document.getElementById("payment-button");
+btn.onclick = function () {
+    // minimum transaction amount must be 10, i.e 1000 in paisa.
+    const amountInPaisa = parseInt(document.getElementById("total_price").innerText);
+    
+    // Check if the amount is 1, then set it to 100
+    const adjustedAmount = (amountInPaisa === 1) ? 100 : amountInPaisa;
+
+    checkout.show({ amount: adjustedAmount });
+}
+
+</script>
+<script>
+    const showMenu = (toggleId, navId) =>{
+        const toggle = document.getElementById(toggleId),
+        nav = document.getElementById(navId)
+    
+        if(toggle && nav){
+            toggle.addEventListener('click', ()=>{
+                nav.classList.toggle('show')
+            })
+        }
+    }
+    showMenu('nav-toggle','nav-menu')
+    
+    /*==================== REMOVE MENU MOBILE ====================*/
+    const navLink = document.querySelectorAll('.nav__link')
+    
+    function linkAction(){
+        const navMenu = document.getElementById('nav-menu')
+        // When we click on each nav__link, we remove the show-menu class
+        navMenu.classList.remove('show')
+    }
+    navLink.forEach(n => n.addEventListener('click', linkAction))
+    
+    /*==================== SCROLL SECTIONS ACTIVE LINK ====================*/
+    const sections = document.querySelectorAll('section[id]')
+    
+    function scrollActive(){
+        const scrollY = window.pageYOffset
+    
+        sections.forEach(current =>{
+            const sectionHeight = current.offsetHeight
+            const sectionTop = current.offsetTop - 50;
+            sectionId = current.getAttribute('id')
+    
+            if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight){
+                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active')
+            }else{
+                document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active')
+            }
+        })
+    }
+    window.addEventListener('scroll', scrollActive)
+    
+    /*===== SCROLL REVEAL ANIMATION =====*/
+    const sr = ScrollReveal({
+        origin: 'top',
+        distance: '60px',
+        duration: 2000,
+        delay: 200,
+    //     reset: true
+    });
+    
+    sr.reveal('.home__data, .about__img, .skills__subtitle, .skills__text',{}); 
+    sr.reveal('.home__img, .about__subtitle, .about__text, .skills__img',{delay: 400}); 
+    sr.reveal('.home__social-icon',{ interval: 200}); 
+    sr.reveal('.skills__data, .work__img, .contact__input',{interval: 200}); 
+    </script>
+    <script>
+       function sendMail() {
+        // Get form values
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let message = document.getElementById("message").value;
+    
+        // Validate form fields
+        if (!name || !email || !message) {
+            createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'All fields are required.');
+                return;
+        }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                // Display a toast notification for invalid email
+                createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Invalid email address.');
+                return;
+            }
+        let parms = {
+            name: name,
+            email: email,
+            message: message,
+        };
+    
+        // Send email using EmailJS
+        emailjs.send("service_5wr48mf", "template_ghrb405", parms)
+            .then(() => {
+                createToast('success', 'fa-solid fa-circle-check', 'Success', 'Thank you for your feedback!');
+            })
+            .catch((error) => {
+                console.error("Error sending email:", error);
+                createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Error sending email.');
+                });
+            
+    }
+    
+    
+    </script>
+    <script>
+        let notifications = document.querySelector('.notifications');
+        let success = document.getElementById('success');
+        let error = document.getElementById('error');
+        let warning = document.getElementById('warning');
+        let info = document.getElementById('info');
+        
+        function createToast(type, icon, title, text){
+            let newToast = document.createElement('div');
+            newToast.innerHTML = `
+                <div class="toast ${type}">
+                    <i class="${icon}"></i>
+                    <div class="content">
+                        <div class="title">${title}</div>
+                        <span>${text}</span>
+                    </div>
+                    <i class="fa-solid fa-xmark" onclick="(this.parentElement).remove()"></i>
+                </div>`;
+            notifications.appendChild(newToast);
+            newToast.timeOut = setTimeout(
+                ()=>newToast.remove(), 5000
+            )
+        }
+        success.onclick = function(){
+            let type = 'success';
+            let icon = 'fa-solid fa-circle-check';
+            let title = 'Success';
+            let text = 'This is a success toast.';
+            createToast(type, icon, title, text);
+        }
+        error.onclick = function(){
+            let type = 'error';
+            let icon = 'fa-solid fa-circle-exclamation';
+            let title = 'Error';
+            let text = 'This is a error toast.';
+            createToast(type, icon, title, text);
+        }
+        warning.onclick = function(){
+            let type = 'warning';
+            let icon = 'fa-solid fa-triangle-exclamation';
+            let title = 'Warning';
+            let text = 'This is a warning toast.';
+            createToast(type, icon, title, text);
+        }
+        info.onclick = function(){
+            let type = 'info';
+            let icon = 'fa-solid fa-circle-info';
+            let title = 'Info';
+            let text = 'This is a info toast.';
+            createToast(type, icon, title, text);
+        }
+    </script>
+</body>
+</html>
